@@ -16,23 +16,30 @@ import { HotelScreenProp } from "../../navigaations/types";
 import styles from "./styles";
 
 const Card = ({ hotel }: hotel) => {
+  //console.log(`hotel = `, hotel);
   const { width } = useWindowDimensions();
   const { navigate } = useNavigation<HotelScreenProp>();
   return (
     <View>
-      <View style={[styles.card, { width: (width * 82) / 100 }]}>
-        <View style={styles.city}>
-          <Text
-            style={{
-              color: COLORS.white,
-              fontSize: 16,
-              fontWeight: "bold",
-            }}
-          >
-            {hotel.city}
-          </Text>
-        </View>
-        <Image source={{ uri: hotel.image }} style={styles.cardImage} />
+      <View style={[styles.card, { width: (width * 85) / 100 }]}>
+        <TouchableOpacity
+          onPress={() => {
+            navigate("HotelDetails", hotel);
+          }}
+        >
+          <View style={styles.city}>
+            <Text
+              style={{
+                color: COLORS.white,
+                fontSize: 16,
+                fontWeight: "bold",
+              }}
+            >
+              {hotel.city}
+            </Text>
+          </View>
+          <Image source={{ uri: hotel.image }} style={styles.cardImage} />
+        </TouchableOpacity>
         <View style={styles.cardDetails}>
           <View
             style={{

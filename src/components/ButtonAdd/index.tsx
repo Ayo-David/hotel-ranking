@@ -11,6 +11,7 @@ interface Props {
 }
 
 const ButtonAdd = ({ scrolled, hotelChains }: Props) => {
+  //console.log(`hotelins = `, hotelChains);
   const { navigate } = useNavigation<HotelScreenProp>();
   const { height } = useWindowDimensions();
 

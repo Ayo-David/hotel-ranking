@@ -45,6 +45,7 @@ const HotelsComponent = ({
         if (!existingChains) {
           existingChains = [];
           setHotelChains(chains);
+          await AsyncStorage.setItem("hotelChains", JSON.stringify(chains));
         } else {
           setHotelChains([...existingChains]);
         }
@@ -52,7 +53,7 @@ const HotelsComponent = ({
         console.log(`error = `, error);
       }
     })();
-  }, []);
+  }, [hotelChains]);
 
   const handleScroll = (e) => {
     const scrollY = e.nativeEvent.contentOffset.y;
