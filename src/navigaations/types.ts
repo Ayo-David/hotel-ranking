@@ -6,9 +6,13 @@ export type HomeStackParamList = {
   CreateHotel:{
     hotel?:hotel,
     hotelChains?:string[]
+  };
+  HotelDetails:{
+    hotel?:hotel,
   }
 }
 
 export type HotelScreenProp = NavigationProp<HomeStackParamList>
 
 export type CreateHotelRouteProp = RouteProp<HomeStackParamList,'CreateHotel'>
+export type HotelDetailsRouteProp = RouteProp<HomeStackParamList,'HotelDetails'>

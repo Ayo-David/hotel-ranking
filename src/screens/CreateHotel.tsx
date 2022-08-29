@@ -76,15 +76,21 @@ const CreateHotel = () => {
   useEffect(() => {
     (async () => {
       let existingChains: any[] = [];
+      // console.log(`foo = `, param?.hotelChains);
+      // if (param?.hotelChains) {
+      //   setHotelChains(params.hotelChains);
+      // } else {
       try {
         existingChains = JSON.parse(
           (await AsyncStorage.getItem("hotelChains")) as string
         );
+        //console.log(`existingChains = `, existingChains);
         setHotelChains([...existingChains]);
       } catch (error) {
         console.log(`error = `, error);
       }
     })();
+    //}
     if (params?.hotel) {
       const { name, city, country, address, chain } = params.hotel;
       setForm({ name, city, country, address, chain });
