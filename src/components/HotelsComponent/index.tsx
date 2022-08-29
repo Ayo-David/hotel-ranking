@@ -99,7 +99,7 @@ const HotelsComponent = ({
           data={hotels}
           onScroll={handleScroll}
           contentContainerStyle={{
-            paddingVertical: 20,
+            paddingVertical: 10,
             paddingHorizontal: 10,
           }}
           renderItem={({ item, index }) => <Card hotel={item} index={index} />}

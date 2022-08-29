@@ -10,11 +10,11 @@ interface Props {
 
 const ChainList = ({ hotelChains, selectedChain, setSelectedChain }: Props) => {
   return (
-    <View style={{ marginVertical: 30, flexDirection: "column" }}>
-      <Text style={{ fontSize: 18, color: COLORS.primary }}>Hotel Chains</Text>
+    <View style={{ marginVertical: 10, flexDirection: "column" }}>
+      <Text style={{ fontSize: 16, color: COLORS.primary }}>Hotel Chains</Text>
       <View
         style={{
-          marginVertical: 5,
+          marginVertical: 3,
           flexDirection: "row",
           justifyContent: "flex-start",
           alignItems: "center",
