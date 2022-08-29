@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, Text, TouchableOpacity, View } from "react-native";
+import {
+  FlatList,
+  StatusBar,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import MainContainer from "../MainContainer";
 import { COLORS } from "../../constants/colors";
 import styles from "./styles";
@@ -64,6 +70,11 @@ const HotelsComponent = ({
 
   return (
     <MainContainer>
+      <StatusBar
+        barStyle="light-content"
+        translucent
+        backgroundColor="rgba(0,0,0,0)"
+      />
       <View style={styles.header}>
         <Text style={{ fontSize: 30, fontWeight: "bold", color: COLORS.dark }}>
           Top Ranked
@@ -97,11 +108,12 @@ const HotelsComponent = ({
         </View>
       ) : (
         <FlatList
+          showsVerticalScrollIndicator={false}
           data={hotels}
           onScroll={handleScroll}
           contentContainerStyle={{
             paddingVertical: 10,
-            paddingHorizontal: 10,
+            paddingHorizontal: 3,
           }}
           renderItem={({ item, index }) => <Card hotel={item} index={index} />}
           inverted

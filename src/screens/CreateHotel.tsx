@@ -3,17 +3,9 @@ import React, { useEffect, useState } from "react";
 import CreateHotelComponent from "../components/CreateHotelComponent";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useDataLayer } from "../context/Provider";
-import {
-  CREATE_HOTELS_SUCCESSFUL,
-  GET_HOTELS_SUCCESSFUL,
-} from "../constants/actionTypes";
+import { CREATE_HOTELS_SUCCESSFUL } from "../constants/actionTypes";
 import { hotel } from "../models/IHotel";
-import {
-  CreateHotelRouteProp,
-  HotelScreenProp,
-  RouteParams,
-} from "../navigaations/types";
-import createHotel from "../context/actions/hotels/createHotels";
+import { CreateHotelRouteProp, HotelScreenProp } from "../navigaations/types";
 import editHotel from "../context/actions/hotels/editHotels";
 
 const CreateHotel = () => {
@@ -31,46 +23,53 @@ const CreateHotel = () => {
   //console.log(`data = `, data);
   const { params } = useRoute<CreateHotelRouteProp>();
 
+  //
+  const isValid = Boolean(
+    form.name && form.city && form.country && form.address && form.chain
+  );
+  //console.log(`isValid = `, isValid);
+
   const onChangeHandler = ({ val, name }: { val: string; name: string }) => {
     setForm({ ...form, [name]: val });
   };
 
   const submitForm = async () => {
-    setLoading(true);
-    if (params?.hotel) {
-      const { id } = params?.hotel;
-      editHotel(id, data, form);
-      setEdit(false);
-      navigate("Home");
-    } else {
-      let existingHotels: any[] = [];
-      let hotel: hotel = [];
-      try {
-        const hotels = (await AsyncStorage.getItem("hotelList")) as string;
-        existingHotels = JSON.parse(hotels);
-        if (!existingHotels) {
-          existingHotels = [];
+    if (isValid) {
+      setLoading(true);
+      if (params?.hotel) {
+        const { id } = params?.hotel;
+        editHotel(id, data, form);
+        setEdit(false);
+        navigate("Home");
+      } else {
+        let existingHotels: any[] = [];
+        let hotel: hotel = [];
+        try {
+          const hotels = (await AsyncStorage.getItem("hotelList")) as string;
+          existingHotels = JSON.parse(hotels);
+          if (!existingHotels) {
+            existingHotels = [];
+          }
+
+          let id: number = ++data.length;
+          let image: string = "https://picsum.photos/700";
+          hotel = { id: id, ...form, image: image };
+
+          const hotelList = [...existingHotels, hotel];
+
+          const hotelJson = JSON.stringify(hotelList);
+          await AsyncStorage.setItem("hotelList", hotelJson);
+        } catch (error) {
+          console.log(`error = `, error);
         }
+        //createHotel(data, form)(dispatch);
 
-        let id: number = ++data.length;
-        let image: string = "https://picsum.photos/700";
-        hotel = { id: id, ...form, image: image };
-
-        const hotelList = [...existingHotels, hotel];
-
-        const hotelJson = JSON.stringify(hotelList);
-        await AsyncStorage.setItem("hotelList", hotelJson);
-      } catch (error) {
-        console.log(`error = `, error);
+        dispatch({ type: CREATE_HOTELS_SUCCESSFUL, payload: hotel });
+        navigate("Home");
       }
-      //createHotel(data, form)(dispatch);
 
-      dispatch({ type: CREATE_HOTELS_SUCCESSFUL, payload: hotel });
-      navigate("Home");
+      setLoading(false);
     }
-
-    // console.log(`form = `, hotelList);
-    setLoading(false);
   };
 
   useEffect(() => {
@@ -106,6 +105,7 @@ const CreateHotel = () => {
       submitForm={submitForm}
       loading={loading}
       edit={edit}
+      isValid={isValid}
     />
   );
 };
