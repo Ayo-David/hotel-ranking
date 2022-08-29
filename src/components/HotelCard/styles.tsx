@@ -14,8 +14,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   card: {
-    height: 280,
-    elevation: 15,
+    height: 250,
+    elevation: 5,
     borderRadius: 15,
     backgroundColor: COLORS.white,
     shadowColor: "#171717",

@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     right: 25,
-    height: 57,
+    height: 47,
     borderRadius: 100,
     alignItems: "center",
     position: "absolute",
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   addTxt: {
     color: "#fff",
     fontWeight: "500",
-    fontSize: 20,
+    fontSize: 16,
     paddingRight: 10,
   },
   icon: {

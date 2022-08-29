@@ -11,6 +11,7 @@ import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Card from "../HotelCard";
 import { hotel } from "../../models/IHotel";
+import { hotelChains as chains } from "../../constants/hotels";
 
 interface Props {
   hotels: hotel;
@@ -35,11 +36,18 @@ const HotelsComponent = ({
   useEffect(() => {
     (async () => {
       let existingChains: any[] = [];
+      //await AsyncStorage.removeItem("hotelChains");
       try {
         existingChains = JSON.parse(
           (await AsyncStorage.getItem("hotelChains")) as string
         );
-        setHotelChains([...existingChains]);
+
+        if (!existingChains) {
+          existingChains = [];
+          setHotelChains(chains);
+        } else {
+          setHotelChains([...existingChains]);
+        }
       } catch (error) {
         console.log(`error = `, error);
       }
@@ -73,7 +81,7 @@ const HotelsComponent = ({
 
       {hotels.length == 0 ? (
         <View>
-          <Text style={{ color: COLORS.grey, fontSize: 32 }}>
+          <Text style={{ color: COLORS.grey, fontSize: 24 }}>
             Oops! No hotel yet!
           </Text>
           <TouchableOpacity
@@ -81,7 +89,7 @@ const HotelsComponent = ({
               navigate("CreateHotel");
             }}
           >
-            <Text style={{ color: COLORS.primary, fontSize: 32 }}>
+            <Text style={{ color: COLORS.primary, fontSize: 24 }}>
               Add Hotel
             </Text>
           </TouchableOpacity>
@@ -91,7 +99,8 @@ const HotelsComponent = ({
           data={hotels}
           onScroll={handleScroll}
           contentContainerStyle={{
-            paddingVertical: 30,
+            paddingVertical: 20,
+            paddingHorizontal: 10,
           }}
           renderItem={({ item, index }) => <Card hotel={item} index={index} />}
           inverted

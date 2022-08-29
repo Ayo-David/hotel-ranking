@@ -3,7 +3,7 @@ import { COLORS } from "../../constants/colors";
 
 const styles = StyleSheet.create({
   header: {
-    marginTop: 40,
+    marginTop: 10,
     paddingTop: 40,
     flexDirection: "column",
   },

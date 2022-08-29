@@ -24,12 +24,12 @@ const ButtonAdd = ({ scrolled, hotelChains }: Props) => {
         styles.addBtn,
         {
           bottom: (height * 5) / 100,
-          width: scrolled ? 63 : 145,
+          width: scrolled ? 50 : 115,
         },
       ]}
       onPress={handleOnpress}
     >
-      <Icon name="add" style={styles.icon} size={30} />
+      <Icon name="add" style={styles.icon} size={24} />
       {!scrolled && <Text style={styles.addTxt}>Add Hotel</Text>}
     </TouchableOpacity>
   );

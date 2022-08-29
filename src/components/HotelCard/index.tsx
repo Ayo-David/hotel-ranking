@@ -20,7 +20,7 @@ const Card = ({ hotel }: hotel) => {
   const { navigate } = useNavigation<HotelScreenProp>();
   return (
     <View>
-      <View style={[styles.card, { width: (width * 88) / 100 }]}>
+      <View style={[styles.card, { width: (width * 82) / 100 }]}>
         <View style={styles.city}>
           <Text
             style={{
@@ -41,7 +41,7 @@ const Card = ({ hotel }: hotel) => {
             }}
           >
             <View>
-              <Text style={{ fontWeight: "bold", fontSize: 17 }}>
+              <Text style={{ fontWeight: "bold", fontSize: 15 }}>
                 {hotel.name}
               </Text>
               <Text style={{ color: COLORS.grey, fontSize: 12 }}>
@@ -71,8 +71,8 @@ const Card = ({ hotel }: hotel) => {
                   navigate("CreateHotel", { hotel });
                 }}
               >
-                <Icon name="edit" size={22} color={COLORS.primary} />
-                <Text style={{ fontSize: 16, color: COLORS.grey }}>Edit</Text>
+                <Icon name="edit" size={18} color={COLORS.primary} />
+                <Text style={{ fontSize: 12, color: COLORS.grey }}>Edit</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.editDeleteBtn}
@@ -96,8 +96,8 @@ const Card = ({ hotel }: hotel) => {
                   );
                 }}
               >
-                <Icon name="delete" size={22} color={COLORS.danger} />
-                <Text style={{ fontSize: 16, color: COLORS.grey }}>Delete</Text>
+                <Icon name="delete" size={18} color={COLORS.danger} />
+                <Text style={{ fontSize: 12, color: COLORS.grey }}>Delete</Text>
               </TouchableOpacity>
             </View>
           </View>

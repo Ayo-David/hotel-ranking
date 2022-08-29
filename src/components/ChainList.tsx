@@ -16,7 +16,7 @@ const ChainList = ({ hotelChains, selectedChain, setSelectedChain }: Props) => {
         style={{
           marginVertical: 5,
           flexDirection: "row",
-          justifyContent: "space-around",
+          justifyContent: "flex-start",
           alignItems: "center",
           flexWrap: "wrap",
         }}

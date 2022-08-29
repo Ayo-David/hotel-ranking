@@ -12,7 +12,7 @@ const MainContainer = ({ children }: Prop) => {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 20,
-    paddingVertical: 20,
+    paddingVertical: 10,
     backgroundColor: COLORS.white,
     flex: 1,
   },

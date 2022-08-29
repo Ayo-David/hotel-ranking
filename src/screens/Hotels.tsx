@@ -31,6 +31,7 @@ const Hotels: React.FC = () => {
 
   useEffect(() => {
     //setHotels([]);
+    //console.log(`hotelCh = `, hotelChains);
     getHotels();
   }, [hotels]);
 
