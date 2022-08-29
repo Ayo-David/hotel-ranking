@@ -21,7 +21,7 @@ const Card = ({ hotel }: hotel) => {
   const { navigate } = useNavigation<HotelScreenProp>();
   return (
     <View>
-      <View style={[styles.card, { width: (width * 85) / 100 }]}>
+      <View style={[styles.card, { width: (width * 87) / 100 }]}>
         <TouchableOpacity
           onPress={() => {
             navigate("HotelDetails", hotel);

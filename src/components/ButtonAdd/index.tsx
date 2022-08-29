@@ -25,7 +25,7 @@ const ButtonAdd = ({ scrolled, hotelChains }: Props) => {
         styles.addBtn,
         {
           bottom: (height * 5) / 100,
-          width: scrolled ? 50 : 115,
+          width: scrolled ? 52 : 115,
         },
       ]}
       onPress={handleOnpress}

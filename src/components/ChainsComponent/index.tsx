@@ -2,6 +2,7 @@ import React from "react";
 import {
   Alert,
   ScrollView,
+  StatusBar,
   Text,
   TextInput,
   TouchableOpacity,
@@ -16,17 +17,23 @@ import CommonButton from "../CommonButton";
 interface Props {
   onChangeHandler: (val: string) => void;
   handleSubmit: () => void;
+  handleEdit: () => void;
   chains: string[];
   setChains: (val: string[]) => void;
+  editChain: (id: number, val: string) => void;
+  edit: { id: number; edit: boolean };
   input: string;
 }
 
 const ChainsComponent = ({
   onChangeHandler,
   handleSubmit,
+  handleEdit,
   setChains,
+  editChain,
   chains,
   input,
+  edit,
 }: Props) => {
   const ListChain = ({ chain }: { chain: string }) => {
     return (
@@ -45,7 +52,10 @@ const ChainsComponent = ({
             </Text>
           </View>
           <View style={{ flexDirection: "row" }}>
-            <TouchableOpacity style={styles.editDeleteBtn} onPressIn={() => {}}>
+            <TouchableOpacity
+              style={styles.editDeleteBtn}
+              onPressIn={() => editChain(chains.indexOf(chain), chain)}
+            >
               <Icon name="edit" size={14} color={COLORS.primary} />
               <Text style={{ fontSize: 14, color: COLORS.grey }}>Edit</Text>
             </TouchableOpacity>
@@ -83,6 +93,11 @@ const ChainsComponent = ({
 
   return (
     <MainContainer>
+      <StatusBar
+        barStyle="light-content"
+        translucent
+        backgroundColor="rgba(0,0,0,0)"
+      />
       <View style={styles.header}>
         <Text style={{ fontSize: 30, fontWeight: "bold", color: COLORS.dark }}>
           Hotel
@@ -105,18 +120,20 @@ const ChainsComponent = ({
           />
           <CommonButton
             primary
-            title="Add Chain"
+            title={edit.edit ? "Edit Chain" : "Add Chain"}
             style={{ paddingHorizontal: 20, marginLeft: 10 }}
-            onPress={handleSubmit}
+            onPress={edit.edit ? handleEdit : handleSubmit}
           />
         </View>
-        <ScrollView contentContainerStyle={{ marginVertical: 20 }}>
-          <View style={styles.wrapper}>
-            {chains.map((chain, i) => (
-              <ListChain key={i} chain={chain} />
-            ))}
-          </View>
-        </ScrollView>
+        <View style={{ height: "auto" }}>
+          <ScrollView contentContainerStyle={{ marginVertical: 20 }}>
+            <View style={styles.wrapper}>
+              {chains.map((chain, i) => (
+                <ListChain key={i} chain={chain} />
+              ))}
+            </View>
+          </ScrollView>
+        </View>
       </View>
     </MainContainer>
   );

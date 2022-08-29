@@ -4,8 +4,13 @@ import ChainsComponent from "../components/ChainsComponent";
 import { hotelChains } from "../constants/hotels";
 
 const Chains = () => {
+  type edit = {
+    id: number;
+    edit: boolean;
+  };
   const [chains, setChains] = useState<string[]>([]);
   const [input, setInput] = useState("");
+  const [edit, setEdit] = useState<edit>({ id: 0, edit: false });
 
   const getChains = async () => {
     let chain: any = "";
@@ -25,6 +30,11 @@ const Chains = () => {
 
   const onChangeHandler = (val: string) => {
     setInput(val);
+  };
+
+  const editChain = (id: number, val: string) => {
+    setInput(val);
+    setEdit({ id: id, edit: true });
   };
 
   const handleSubmit = async () => {
@@ -52,6 +62,13 @@ const Chains = () => {
     setInput("");
   };
 
+  const handleEdit = async () => {
+    input != "" && chains.splice(edit.id, 1, input);
+    await AsyncStorage.setItem("hotelChains", JSON.stringify(chains));
+    setEdit({ ...edit, edit: false });
+    setInput("");
+  };
+
   useEffect(() => {
     getChains();
   }, []);
@@ -60,7 +77,10 @@ const Chains = () => {
     <ChainsComponent
       onChangeHandler={onChangeHandler}
       handleSubmit={handleSubmit}
+      handleEdit={handleEdit}
       chains={chains}
+      edit={edit}
+      editChain={editChain}
       setChains={setChains}
       input={input}
     />

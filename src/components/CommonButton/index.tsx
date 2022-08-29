@@ -49,6 +49,7 @@ const CommonButton = ({
     <View>
       <TouchableOpacity
         style={[styles.wrapper, { backgroundColor: getBackground() }, style]}
+        disabled={disabled}
         {...props}
       >
         <View style={styles.loadingSection}>
@@ -61,7 +62,7 @@ const CommonButton = ({
           {title && (
             <Text
               style={{
-                color: disabled ? "black" : COLORS.white,
+                color: COLORS.white,
                 fontSize: 18,
                 fontWeight: "bold",
               }}
