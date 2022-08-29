@@ -119,7 +119,7 @@ const CreateHotelComponent = ({
             }}
           >
             <Text style={{ paddingRight: 20 }}>Hotel Chain</Text>
-            {//console.log(`lChains = `, hotelChains)}
+
             <SelectDropdown
               data={hotelChains}
               onSelect={(val, index) => {
